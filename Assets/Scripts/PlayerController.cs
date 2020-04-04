@@ -2,14 +2,14 @@
 
 public class PlayerController : MonoBehaviour
 {
-    private float speed = 15f;
+    [SerializeField] float speed = 15f;
     private float horizontalInput;
-    private float turnSpeed = 100f;
+    [SerializeField] float turnSpeed = 100f;
     private float verticalInput;
     private float acceleration;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.LeftShift))
         {
