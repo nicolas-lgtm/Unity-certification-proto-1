@@ -1785,7 +1785,6 @@ GameObject:
   m_Component:
   - component: {fileID: 781612968}
   - component: {fileID: 781612967}
-  - component: {fileID: 781612966}
   - component: {fileID: 781612965}
   m_Layer: 0
   m_Name: FPS Camera
@@ -1808,14 +1807,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 42849922}
   offset: {x: 0, y: 2, z: 1.5}
---- !u!81 &781612966
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 781612964}
-  m_Enabled: 1
 --- !u!20 &781612967
 Camera:
   m_ObjectHideFlags: 0
