@@ -5,8 +5,9 @@ using TMPro;
 
 public class Countdown : MonoBehaviour
 {
-    private float countdown = 3;
+    [SerializeField] private float countdown = 3;
     [SerializeField] TextMeshProUGUI countdownTxt;
+    [SerializeField] TextMeshProUGUI speedTxt;
     private PlayerController playerControllerScript;
 
     private void Start()
@@ -24,6 +25,7 @@ public class Countdown : MonoBehaviour
             playerControllerScript.raceIsActive = true;
             this.gameObject.SetActive(false);
             countdownTxt.gameObject.SetActive(false);
+            speedTxt.gameObject.SetActive(true);
             GameObject.Find("Checkpoint 1").gameObject.GetComponent<Renderer>().material.color = Color.yellow;
         }
         else
