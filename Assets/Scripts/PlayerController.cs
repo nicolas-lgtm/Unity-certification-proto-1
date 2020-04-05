@@ -1,29 +1,47 @@
 ﻿using UnityEngine;
-
+using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float speed = 15f;
-    private float horizontalInput;
     [SerializeField] float turnSpeed = 100f;
+    [SerializeField] GameObject checkpointParent;
+
+    private float horizontalInput;
     private float verticalInput;
+
     private float acceleration;
 
-    // Update is called once per frame
+    public bool raceIsActive;
+
+    [SerializeField] Button restartButton;
+
     void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (raceIsActive)
         {
-            acceleration = 1.5f;
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                acceleration = 1.5f;
+            }
+            else
+            {
+                acceleration = 1;
+            }
+
+            horizontalInput = Input.GetAxis("Horizontal");
+            transform.Translate(Vector3.forward * Time.deltaTime * speed * verticalInput * acceleration);
+
+            verticalInput = Input.GetAxis("Vertical");
+            if (verticalInput != 0) transform.Rotate(Vector3.up, Time.deltaTime * turnSpeed * horizontalInput);
         }
-        else
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Arrival") && checkpointParent.transform.childCount <= 0)
         {
-            acceleration = 1;
+            raceIsActive = false;
+            restartButton.gameObject.SetActive(true);
         }
-
-        horizontalInput = Input.GetAxis("Horizontal");
-        transform.Translate(Vector3.forward * Time.deltaTime * speed * verticalInput * acceleration);
-
-        verticalInput = Input.GetAxis("Vertical");
-        if(verticalInput != 0) transform.Rotate(Vector3.up, Time.deltaTime * turnSpeed * horizontalInput);
     }
 }
