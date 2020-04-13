@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
-using TMPro;
 
 public class Countdown : MonoBehaviour
 {
@@ -14,7 +12,7 @@ public class Countdown : MonoBehaviour
     {
         playerControllerScript = GameObject.Find("Vehicule").GetComponent<PlayerController>();
         playerControllerScript.raceIsActive = false;
-      //  StartCoroutine(f_Countdown());
+        //  StartCoroutine(f_Countdown());
     }
 
     private void Update()

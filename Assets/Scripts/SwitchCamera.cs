@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using Cinemachine;
+﻿using Cinemachine;
+using UnityEngine;
 
 public class SwitchCamera : MonoBehaviour
 {
@@ -14,7 +14,7 @@ public class SwitchCamera : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-                TPSCam.Priority *= -1;
+            TPSCam.Priority *= -1;
         }
     }
 }

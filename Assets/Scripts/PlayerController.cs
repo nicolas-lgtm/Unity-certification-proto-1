@@ -1,19 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 public class PlayerController : MonoBehaviour
 {
     //[SerializeField] private float speed = 15f;
-    [SerializeField] private float horsePower = 20000f;
-    [SerializeField] const float turnSpeed = 100f;
+    //[SerializeField] private float horsePower = 20000f;
+    [SerializeField] const float turnSpeed = 100;
+    [SerializeField] const float forwardSpeed = 25;
     [SerializeField] GameObject checkpointParent;
-    [SerializeField] GameObject centerOfMass;
+    //[SerializeField] GameObject centerOfMass;
     [SerializeField] TextMeshProUGUI speedTxt;
     [SerializeField] TextMeshProUGUI RPMTxt;
-    [SerializeField] private List<WheelCollider> listOfWheels;
+    //[SerializeField] private List<WheelCollider> listOfWheels;
 
-    private float speed;
+    private float speed;//speed displayed
     private float rpm;
 
     private float horizontalInput;
@@ -25,42 +25,46 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Button restartButton;
 
-    private Rigidbody playerRb;
+    //private Rigidbody playerRb;
 
     private void Start()
     {
-        playerRb = GetComponent<Rigidbody>();
-        playerRb.centerOfMass = centerOfMass.transform.position;
+        //playerRb = GetComponent<Rigidbody>();
+        // playerRb.centerOfMass = centerOfMass.transform.position;
     }
 
     void FixedUpdate()
     {
         if (raceIsActive)
         {
-            Debug.Log(IsOnGround());
-            if (IsOnGround())
+            //if (IsOnGround())
+            //{
+            if (Input.GetKey(KeyCode.LeftShift))
             {
-                if (Input.GetKey(KeyCode.LeftShift))
-                {
-                    acceleration = 2f;
-                }
-                else
-                {
-                    acceleration = 1f;
-                }
-
-                horizontalInput = Input.GetAxis("Horizontal");
-                //transform.Translate(Vector3.forward * Time.deltaTime * speed * verticalInput * acceleration);
-                playerRb.AddRelativeForce(Vector3.forward * horsePower * verticalInput * acceleration);
-                verticalInput = Input.GetAxis("Vertical");
-
-                if (verticalInput != 0) transform.Rotate(Vector3.up, Time.deltaTime * turnSpeed * horizontalInput);
+                acceleration = 2f;
             }
-          
-            speed = Mathf.RoundToInt(playerRb.velocity.magnitude * 3.6f);
+            else
+            {
+                acceleration = 1f;
+            }
+
+            horizontalInput = Input.GetAxis("Horizontal");
+
+            //playerRb.AddRelativeForce(Vector3.forward * horsePower * verticalInput * acceleration);
+
+            verticalInput = Input.GetAxis("Vertical");
+
+            transform.Translate(Vector3.forward * Time.deltaTime * forwardSpeed * verticalInput * acceleration);
+
+
+
+            if (verticalInput != 0) transform.Rotate(Vector3.up, Time.deltaTime * turnSpeed * horizontalInput);
+            //}
+
+            //speed = Mathf.RoundToInt(playerRb.velocity.magnitude * 3.6f);
             rpm = speed % 30 * 40;
 
-            speedTxt.SetText(speed.ToString() + " km/h");
+            //speedTxt.SetText(speed.ToString() + " km/h");
             RPMTxt.SetText(rpm.ToString() + "RPM");
         }
     }
@@ -74,19 +78,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    bool IsOnGround()
-    {
-        int wheelsGrounded = 0;
+    //bool IsOnGround()
+    //{
+    //    int wheelsGrounded = 0;
 
-        foreach (WheelCollider wheel in listOfWheels)
-        {
-            if (wheel.isGrounded)
-            {
-                wheelsGrounded++;
-            }
-        }
+    //    foreach (WheelCollider wheel in listOfWheels)
+    //    {
+    //        if (wheel.isGrounded)
+    //        {
+    //            wheelsGrounded++;
+    //        }
+    //    }
 
-        return wheelsGrounded == 4;
+    //    return wheelsGrounded == 4;
 
-    }
+    //}
 }
